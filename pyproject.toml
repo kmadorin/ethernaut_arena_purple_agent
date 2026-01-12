@@ -1,12 +1,20 @@
 [project]
-name = "agent-template"
+name = "ethernaut-arena-purple-agent"
 version = "0.1.0"
-description = "A template for A2A agents"
+description = "AI-powered Ethernaut challenge solver using Google Gemini"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "a2a-sdk[http-server]>=0.3.20",
-    "uvicorn>=0.38.0",
+    # A2A Protocol & Google ADK (pinned to match arena's working setup)
+    "a2a-sdk>=0.3.5",
+    "google-adk==1.21.0",
+    "google-genai>=1.36.0",
+
+    # Server & Utils
+    "uvicorn>=0.35.0",
+    "httpx>=0.28.0",
+    "pydantic>=2.11.9",
+    "python-dotenv>=1.1.1",
 ]
 
 [project.optional-dependencies]
