@@ -1,14 +1,16 @@
-# Ethernaut Arena Purple Agent
+# Ethernaut Arena Purple Agent (Baseline)
 
-An AI-powered smart contract security solver for [Ethernaut](https://ethernaut.openzeppelin.com/) challenges, built using Google Gemini and the [A2A (Agent-to-Agent)](https://a2a-protocol.org/latest/) protocol.
+A baseline AI-powered smart contract security solver for [Ethernaut](https://ethernaut.openzeppelin.com/) challenges, built using Google Gemini and the [A2A (Agent-to-Agent)](https://a2a-protocol.org/latest/) protocol.
 
 ## Overview
 
-This purple agent is part of the **Ethernaut Arena** evaluation platform. It works with the [Ethernaut Green Agent (evaluator)](../ethernaut_arena_green_agent) to solve Ethernaut smart contract security challenges.
+This purple agent serves as a **baseline implementation** for the **Ethernaut Arena** evaluation platform. It works with the [Ethernaut Green Agent (evaluator)](https://github.com/kmadorin/ethernaut_arena_green_agent) to solve Ethernaut smart contract security challenges.
 
 **Architecture:**
 - **Green Agent** (port 9010): Orchestrates the evaluation, manages blockchain, provides tools
 - **Purple Agent** (port 9020): AI solver that analyzes contracts and finds exploits
+
+This implementation demonstrates how to build purple agents for Ethernaut Arena. You can fork this repository and create your own improved solver.
 
 ## Project Structure
 
@@ -130,6 +132,38 @@ The repository includes a GitHub Actions workflow that automatically builds, tes
 | `--host` | Host to bind to | `127.0.0.1` |
 | `--port` | Port to listen on | `9020` |
 | `--card-url` | URL for agent card | Auto-generated |
+
+## Publishing to AgentBeats
+
+### 1. Build and Push Docker Image
+
+The CI/CD workflow automatically builds and publishes your Docker image to GitHub Container Registry:
+
+- **Push to `main`** → publishes `latest` tag
+- **Create git tag** (e.g., `v1.0.0`) → publishes version tags
+
+Manual publishing:
+```bash
+docker build -t ghcr.io/<username>/ethernaut-arena-purple-agent:latest .
+docker push ghcr.io/<username>/ethernaut-arena-purple-agent:latest
+```
+
+### 2. Register on AgentBeats
+
+1. Go to [agentbeats.dev](https://agentbeats.dev)
+2. Click "Register Agent" and select "Purple Agent"
+3. Provide your Docker image reference
+4. Set category to "Cybersecurity Agent"
+5. Copy your agent UUID from the agent page (needed for scenario.toml)
+
+### 3. Submit to Leaderboard
+
+See the [Ethernaut Arena Leaderboard](https://github.com/kmadorin/ethernaut_arena_leaderboard) repository for instructions on submitting your agent for evaluation.
+
+## Related Repositories
+
+- **[Ethernaut Arena Green Agent](https://github.com/kmadorin/ethernaut_arena_green_agent)** - The evaluator agent
+- **[Ethernaut Arena Leaderboard](https://github.com/kmadorin/ethernaut_arena_leaderboard)** - Assessment runner and results
 
 ## License
 
