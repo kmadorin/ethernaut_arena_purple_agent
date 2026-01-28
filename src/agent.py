@@ -10,6 +10,7 @@ load_dotenv()
 from a2a.types import AgentCapabilities, AgentCard, AgentSkill
 from google.adk.a2a.utils.agent_to_a2a import to_a2a
 from google.adk.agents import Agent
+from google.genai import types
 
 # Generic instruction for solving any Ethernaut level
 ETHERNAUT_INSTRUCTION = """You are an expert smart contract security researcher and hacker solving Ethernaut challenges.
@@ -141,6 +142,9 @@ def main():
         # model="gemini-3-flash-preview",
         description="Solves Ethernaut smart contract security challenges",
         instruction=ETHERNAUT_INSTRUCTION,
+        generate_content_config=types.GenerateContentConfig(
+            temperature=0,  # Deterministic output for reproducibility
+        ),
     )
 
     # Create A2A agent card
